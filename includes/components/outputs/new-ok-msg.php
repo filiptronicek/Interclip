@@ -5,6 +5,10 @@
 ?>
 
 <?php if ($err === ""): ?>
+    <button style="display: none;" onclick="share()" id="shareBtn">
+        Share this!
+    </button>
+
     <p><span id="url" class="url"><?php echo $url ?> </span><br><br> was saved as</p>
     <h1 class="usrCode"><?php echo $usr ?></h1>
     <div id="embed"> </div>
@@ -14,7 +18,11 @@
     <h1 class="usrCode"><?php echo $err ?></h1>
 <?php endif; ?>
 
+<script>
+    const url = "<?php echo $url ?>";
+</script>
 
+<script src="<?php echo ROOT; ?>/js/new.js"></script>
 <script type="module">
     /* MIT  Copyright (c) Feross Aboukhadijeh */
 
