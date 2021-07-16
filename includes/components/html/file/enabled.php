@@ -2,7 +2,7 @@
 <div class="title">
     <h1>Upload a file to Interclip</h1>
     <p class="note">Upload any file type that's under 100MB.</p>
-    <div class="demo-droppable">
+    <div class="demo-droppable" id="dropzone">
         <p>Drag files here or click to upload</p>
     </div>
 
@@ -27,7 +27,6 @@
 </div>
 
 <script>
-    clickEnabled = true;
     const csrfToken = "<?= $_SESSION['token'] ?>";
 </script>
 <script src="<?php echo ROOT ?>/js/file.js"></script>

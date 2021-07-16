@@ -57,7 +57,7 @@ $currBranch = $branches["current"];
     <span class="lg">PHP <?php echo phpversion(); ?></span>
     <span class="lg">Memory: <?php echo formatBytes(memory_get_usage()) ?></span>
     <span class="ending lg">
-      Hi, <?php echo $user["name"] ? $user['name'] : $user["nickname"]  ?>
+      Hi, <?php echo $user["name"] ?? $user["nickname"]  ?>
       <a class="subitem" href="<?php echo ROOT ?>/logout">Log out</a>
     </span>
   </div>

@@ -50,11 +50,11 @@ $err = $createArray[1];
             scheme = style;
         }
 
-        document.getElementById('qrcode').innerHTML = "";
+        document.getElementById("qrcode").innerHTML = "";
         const qr = QRCode.generateSVG("https://interclip.app/<?php echo $usr ?>", {
             ecclevel: "M",
-            fillcolor: scheme === 'dark' ? "#444444" : "#ff9800",
-            textcolor: scheme === 'dark' ? "#e4e4e4" : "#000000",
+            fillcolor: scheme === 'dark' ? "#151515" : "#157EFB",
+            textcolor: "#e4e4e4",
             margin: 0,
             modulesize: 4
         });
@@ -78,4 +78,22 @@ $err = $createArray[1];
         update(toggle.value);
     });
 
+    const initialValue = localStorage.getItem("recentClips");
+    const url = "<?php echo $url ?>";
+
+    if (initialValue) {
+        const recentlyMadeArray = JSON.parse(initialValue);
+        if (!recentlyMadeArray.includes(url)) {
+            recentlyMadeArray.push(url);
+        }
+        if (recentlyMadeArray.length > 6) {
+            const reversedRecents = recentlyMadeArray.reverse();
+            reversedRecents.pop();
+            localStorage.setItem("recentClips", JSON.stringify(reversedRecents.reverse()));
+        } else {
+            localStorage.setItem("recentClips", JSON.stringify(recentlyMadeArray));
+        }
+    } else {
+        localStorage.setItem("recentClips", JSON.stringify([url]))
+    }
 </script>

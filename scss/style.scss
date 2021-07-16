@@ -1,4 +1,15 @@
-@charset "UTF-8";
+@import "_skip-link.scss";
+
+.loading-modal {
+  background-color: rgba(255, 255, 255, 0.8);
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
 
 body.loading .loading-modal {
   display: block;
@@ -21,11 +32,6 @@ body.loading .loading-modal {
 
 .info {
   margin-top: 11%;
-}
-
-body {
-  background-color: #ff9800;
-  margin: 0;
 }
 
 .dropzone p {
@@ -59,17 +65,6 @@ body {
 
 .dropzone.dropzone-dragging {
   border-color: #000;
-}
-
-.loading-modal {
-  background-color: rgba(255, 255, 255, 0.8);
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
 }
 
 .loading-table {

@@ -1,9 +1,0 @@
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #2a2a2e;
-    color: #fff;
-  }
-  section aside {
-    box-shadow: none;
-  }
-}

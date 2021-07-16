@@ -31,7 +31,7 @@
 
 <link rel="stylesheet" href="<?php echo ROOT ?>/css/menu.css">
 <link rel="stylesheet" href="<?php echo ROOT ?>/css/dark.css" media="(prefers-color-scheme: dark)">
-<link href="https://fonts.googleapis.com/css2?family=Palanquin&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
 <!-- External JS libraries -->
 <script type="module" src="https://cdn.skypack.dev/pin/dark-mode-toggle@v0.8.0-8sz7Rv9Ou4431j6B2ucG/mode=imports,min/optimized/dark-mode-toggle.js"></script>
@@ -43,4 +43,4 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="-YbUutUgfmvMugp0SOLLwef8BKdDcRvSoOvlQVJx4oM" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="theme-color" content="<?php echo $_ENV['ENVIRONMENT'] === 'staging' ? '#F15922' : ($user ? '#588D6A' : '#333333') ?>">
+<meta name="theme-color" content="<?php echo $_ENV['ENVIRONMENT'] === 'staging' ? '#F15922' : ($user ? '#588D6A' : '#262626') ?>">

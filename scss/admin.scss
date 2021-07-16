@@ -1,0 +1,25 @@
+@import "_mvp_reverts.scss";
+@import "_skip-link.scss";
+
+section aside {
+  background: white;
+  color: black;
+}
+
+/* Style dark mode */
+@media (prefers-color-scheme: dark) {
+  body,
+  section aside {
+    background: #2a2a2e;
+    color: #fff;
+  }
+
+  section aside {
+    border: none;
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}

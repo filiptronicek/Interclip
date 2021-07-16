@@ -1,9 +1,4 @@
-body {
-  margin: 0;
-  width: 100%;
-  background-color: #ff9800;
-  height: auto;
-}
+@import "_skip-link.scss";
 
 #fullscreen {
   width: 100%;
@@ -25,8 +20,6 @@ body {
   padding-bottom: 20px;
   padding-top: 2px;
   margin: 0 auto;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
   border-radius: 20px;
   color: #fff;
 }
@@ -55,13 +48,11 @@ h1.errheader {
 
 @keyframes tada {
   from {
-    -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
   }
 
   10%,
   20% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
     transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
   }
 
@@ -69,19 +60,16 @@ h1.errheader {
   50%,
   70%,
   90% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
     transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
   }
 
   40%,
   60%,
   80% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
     transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
   }
 
   to {
-    -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
   }
 }

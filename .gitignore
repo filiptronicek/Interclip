@@ -1,6 +1,6 @@
 # Development
-.vscode/
 desktop.ini
+css/
 
 upload.py
 diff.txt
@@ -13,3 +13,4 @@ vendor/
 public/upload/uploads/
 includes/size.json
 .env
+dump.rdb

@@ -6,7 +6,6 @@
     ?>
     <title>Receive link | Interclip</title>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo ROOT ?>/css/button.css">
     <link rel="stylesheet" type="text/css" href="<?php echo ROOT ?>/css/receive.css">
 </head>
 
@@ -21,17 +20,25 @@
     <main id="maincontent">
         <div class="wrapper">
             <div class="form-container">
-                <form id="inputform" name="form" onsubmit="return validateForm()" action="/get" method="POST">
-                    <div class="full-screen">
-                        <div class="input-wrap">
-                            <p class="title">Receive link</p>
-                            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>" />
-                            <input type="text" name="user" minlength="5" maxlength="5" id="code" placeholder="h&amp;$h">
-                            <br>
-                            <a class="btn" onClick="submit()" data-title="Make the magic happen"></a>
-                            <div id="result"></div>
-                            <div id="modalpage">
-                            </div>
+                <form id="inputform" name="form" action="<?php echo ROOT ?>/get" method="POST">
+                    <div class="input-wrap">
+                        <p class="title">Receive link</p>
+                        <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>" />
+                        <input
+                            type="text"
+                            name="user"
+                            minlength="5"
+                            maxlength="5"
+                            id="code"
+                            placeholder="h&amp;$h"
+                            pattern="^[A-Za-z0-9]{5}$"
+                            title="Input must be a valid clip code 😢"
+                            required
+                        >
+                        <br>
+                        <button type="submit" class="btn">Retreive</a>
+                        <div id="result"></div>
+                        <div id="modalpage">
                         </div>
                     </div>
                 </form>

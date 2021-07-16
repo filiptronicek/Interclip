@@ -1,37 +1,53 @@
-
 image:
   file: .gitpod.dockerfile
 ports:
-- port: 8080
-  onOpen: open-preview
-- port: 3306
-  onOpen: ignore
+  - port: 8080
+    onOpen: open-browser
+    visibility: public
+  - port: 3306
+    onOpen: ignore
+  - port: 6379
+    onOpen: ignore
 
 tasks:
-- name: Terminal
-  before: >
-    curl https://rclone.org/install.sh | sudo bash; 
-    sudo apt update; 
-    sudo apt upgrade -y;
-    sudo apt remove composer -y;
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";
-    php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;";
-    sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer;
-    php -r "unlink('composer-setup.php');"
-  init: composer install
-  command: >
-    bash scripts/secrets.sh;
-    mkdir public/upload/uploads;
-    gp await-port 3306 &&
-    mysql -e "CREATE DATABASE iclip;";
-    mysql < scripts/db.sql;
-- name: Apache
-  openMode: split-right
-  command: >
-    sudo cp apache.conf /etc/apache2/apache2.conf &&
-    gp await-port 3306 &&
-    apachectl start &&
-    multitail /var/log/apache2/access.log -I /var/log/apache2/error.log
+  - name: App
+    command: >
+      curl https://rclone.org/install.sh | sudo bash; 
+
+      sudo apt update;
+      sudo apt upgrade -y;
+      sudo apt install redis-server -y;
+      sudo apt install php-redis -y;
+
+      sudo apt remove composer -y;
+      php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";
+      php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;";
+      sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer;
+      php -r "unlink('composer-setup.php');"
+
+      composer install
+
+      bash scripts/secrets.sh;
+      mkdir public/upload/uploads;
+      gp await-port 3306 &&
+      mysql -e "CREATE DATABASE iclip;";
+      mysql < scripts/db.sql;
+
+      sudo echo extension=redis.so >> /etc/php/7.4/apache2/php.ini;
+      gp await-port 8080;
+      apachectl restart;
+      redis-server;
+  - name: Apache
+    openMode: split-right
+    command: >
+      sudo cp apache.conf /etc/apache2/apache2.conf &&
+      gp await-port 3306 &&
+      apachectl start &&
+      multitail /var/log/apache2/access.log -I /var/log/apache2/error.log
+  - name: Sass compiler
+    command: >
+      npm i -g sass;
+      sass scss/:css/ -w -s compressed
 
 github:
   prebuilds:
@@ -41,3 +57,4 @@ github:
 vscode:
   extensions:
     - bmewburn.vscode-intelephense-client
+    - cweijan.vscode-redis-client

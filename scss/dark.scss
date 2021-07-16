@@ -1,0 +1,47 @@
+@import "_colors.scss";
+
+body,
+html,
+.select,
+.select::after,
+#slct,
+.full-screen,
+#code {
+  background: $darkBG !important;
+  color: $darkText !important;
+}
+
+img {
+  filter: grayscale(20%) !important;
+}
+
+.modal-content,
+.modal-content > p,
+#progressPercent {
+  background: #373737 !important;
+  color: white !important;
+}
+
+.select::after {
+  background: #333 !important;
+}
+
+.closeBtn:hover {
+  color: white !important;
+}
+
+#menu {
+  background: #262626 !important;
+}
+
+body.dragover {
+  background: #3B3B3B !important;
+}
+
+span.input-wrapper {
+  color: #353535 !important;
+
+  &:focus-within {
+    color: $darkBG !important;
+  }
+}

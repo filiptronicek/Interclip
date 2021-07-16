@@ -1,0 +1,103 @@
+@import "_progressbar.scss";
+@import "_copy.scss";
+@import "_skip-link.scss";
+@import "_colors.scss";
+
+/* Style */
+
+input::placeholder {
+  color: #555;
+}
+
+span.input-wrapper {
+  position: relative;
+  color: $lighterBlue;
+  transition: color 200ms;
+
+  &:focus-within {
+    color: $primaryBlue;
+  }
+
+  select {
+    max-width: 8em;
+    position: absolute;
+    top: 2.5rem;
+    right: 3%;
+  }
+
+  .square {
+    box-sizing: border-box;
+    padding: 0 10px;
+    width: 45rem;
+    max-width: 90vw;
+    height: 3.2rem;
+    font-size: 16px;
+    font-weight: 400;
+    outline: 0;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+    color: black;
+    background: white;
+  }
+
+  svg {
+    cursor: pointer;
+    position: absolute;
+    top: -10%;
+    right: 3%;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+main {
+  height: 100%;
+  margin-top: 30vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main h2 {
+  font-size: 3em;
+  text-align: center;
+}
+
+.demo-droppable {
+  color: #000;
+  text-align: center;
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  height: 90vh;
+  width: 100vw;
+  z-index: -5;
+}
+
+.code {
+  font-size: 3rem;
+}
+
+.modal img {
+  margin: auto;
+}
+
+.modal {
+  max-height: 100vh;
+  display: none;
+  text-align: center;
+}
+
+.copy {
+  display: none;
+}
+
+.output {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

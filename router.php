@@ -7,72 +7,75 @@ use Pecee\SimpleRouter\SimpleRouter;
 
 /* Dynamic pages */
 
-SimpleRouter::get('/', function () {
-    include_once "public/index.php";
-});
+SimpleRouter::group(['prefix' => ROOT], function () {
 
-SimpleRouter::get('/receive/', function () {
-    include_once "public/receive.php";
-});
+    SimpleRouter::get('/', function () {
+        include_once "public/index.php";
+    });
 
-SimpleRouter::get('/file/', function () {
-    include_once "public/file.php";
-});
+    SimpleRouter::get('/receive/', function () {
+        include_once "public/receive.php";
+    });
 
-SimpleRouter::form('/upload/', function () {
-    include_once "public/upload/index.php";
-});
+    SimpleRouter::get('/file/', function () {
+        include_once "public/file.php";
+    });
 
-SimpleRouter::get('/admin/', function () {
-    include_once "public/admin.php";
-});
+    SimpleRouter::form('/upload/', function () {
+        include_once "public/upload/index.php";
+    });
 
-/* Clip manipulation */
+    SimpleRouter::get('/admin/', function () {
+        include_once "public/admin.php";
+    });
 
-SimpleRouter::form('/get', function () {
-    include_once "public/core/get.php";
-});
+    /* Clip manipulation */
 
-SimpleRouter::form('/set', function () {
-    include_once "public/core/set.php";
-});
+    SimpleRouter::form('/get', function () {
+        include_once "public/core/get.php";
+    });
 
-/* Static pages */
+    SimpleRouter::form('/set', function () {
+        include_once "public/core/set.php";
+    });
 
-SimpleRouter::get('/desktop/', function () {
-    include_once "public/desktop.php";
-});
+    /* Static pages */
 
-SimpleRouter::get('/about/', function () {
-    include_once "public/about.php";
-});
+    SimpleRouter::get('/desktop/', function () {
+        include_once "public/desktop.php";
+    });
 
-/* Auth */
-SimpleRouter::get('/login/', function () {
-    include_once "public/login.php";
-});
+    SimpleRouter::get('/about/', function () {
+        include_once "public/about.php";
+    });
 
-SimpleRouter::get('/logout/', function () {
-    include_once "public/logout.php";
-});
+    /* Auth */
+    SimpleRouter::get('/login/', function () {
+        include_once "public/login.php";
+    });
 
-SimpleRouter::get('/privacy/', function () {
-    include_once "public/privacy.php";
-});
+    SimpleRouter::get('/logout/', function () {
+        include_once "public/logout.php";
+    });
 
-/* API */
-SimpleRouter::match(['get', 'post'], '/includes/api', function () {
-    include_once "public/api/set.php";
-});
+    SimpleRouter::get('/privacy/', function () {
+        include_once "public/privacy.php";
+    });
 
-SimpleRouter::match(['get', 'post'], '/includes/get-api', function () {
-    include_once "public/api/get.php";
-});
+    /* API */
+    SimpleRouter::match(['get', 'post'], '/api/set', function () {
+        include_once "public/api/set.php";
+    });
 
-/* Internal behavior */
+    SimpleRouter::match(['get', 'post'], '/api/get', function () {
+        include_once "public/api/get.php";
+    });
 
-SimpleRouter::get('/staging/change-branch', function () {
-    include_once "public/change-branch.php";
+    /* Internal behavior */
+
+    SimpleRouter::get('/staging/change-branch', function () {
+        include_once "public/change-branch.php";
+    });
 });
 
 use Pecee\Http\Request;
@@ -90,9 +93,9 @@ SimpleRouter::error(function (Request $request, \Exception $exception) {
         header("Location: $url");
     } else {
         $statusCode = $exception->getCode();
+        http_response_code($statusCode);
         include_once "includes/error.php";
     }
 });
-
 // Start the routing
 SimpleRouter::start();

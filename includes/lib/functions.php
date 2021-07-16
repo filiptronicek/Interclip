@@ -111,7 +111,7 @@ function getOS()
 /**
  * Get an array of various OS info
  *
- * @return array
+ * @return array|null
  */
 function getOSInformation()
 {

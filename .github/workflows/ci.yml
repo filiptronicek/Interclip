@@ -40,5 +40,11 @@ jobs:
     - name: 🎹 Install Composer Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
+    - name: 🤩 Compile styles
+      env:
+        NPM_CONFIG_PREFIX: "~/.npm-global"
+      run: |
+        npx sass scss/:css/ -s compressed
+
     - name: 🧪 Run tests
       run: ./vendor/bin/pest

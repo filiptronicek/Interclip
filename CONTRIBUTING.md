@@ -11,9 +11,17 @@ Hi, thanks for considering contributing to Interclip! Here's a guide on how to g
 - MySQL database server
 - Composer v2 or newer
 - Git
+- Sass CLI
+- (optional) Redis ([installation guide](https://redis.io/download))
 
 ## Installing dependencies
 1. `composer install`
+2. (optional) Install the Redis PHP extension: `sudo apt-get install php-redis`
+3. (optional) After downloading the extension, add this to your php.ini: `extension=redis.so` (you may need to restart your Apache server afterwards)
+
+## Compiling stylesheets
+1. Install sass globally: `npm i -g sass`
+2. Watch the styles `sass scss/:css/ -w -s compressed`
 
 ## Setting up the env files
 1. First things first, copy the example .env file called `.env.sample`:

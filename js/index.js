@@ -1,15 +1,30 @@
-const input = document.getElementById("search-input");
-const searchBtn = document.getElementById("search-btn");
+const historyBtn = document.querySelector("#content > .input-wrapper > svg");
+const selectDropdown = document.querySelector(".history-select")
+const linkInput = document.getElementById("search-input");
+const form = document.getElementById("content");
 
-const expand = () => {
-  searchBtn.classList.toggle("close");
-  input.classList.toggle("square");
-  if (input.hasAttribute("placeholder")) {
-    input.blur(); // Remove focus
-    input.removeAttribute("placeholder");
-  } else {
-    input.setAttribute("placeholder", "Paste your link here");
-  }
-};
+historyBtn.onclick = () => {
+    selectDropdown.classList.toggle("hidden");
+}
 
-searchBtn.addEventListener("click", expand);
+selectDropdown.onchange = (e) => {
+    linkInput.value = e.target.value;
+    form.submit();
+}
+
+const getEntries = () => {
+    const initialValue = localStorage.getItem("recentClips");
+    return initialValue ? JSON.parse(initialValue) : [];
+}
+
+const recentlyMade = getEntries();
+
+if (recentlyMade.length > 0) {
+    historyBtn.classList.remove("hidden")
+    for (const clip of recentlyMade) {
+        const option = document.createElement("option");
+        option.value = clip;
+        option.innerText = clip;
+        selectDropdown.append(option);
+    }
+}

@@ -8,9 +8,12 @@ include_once "includes/lib/auth.php";
 
 include_once "includes/lib/sentry.php";
 include_once "includes/lib/functions.php";
+include_once "includes/components/redis.php";
+
+global $isWindows;
 
 if (!$isWindows) {
-    $osinfo = getOSInformation();
+    $osinfo = getOSInformation() ?? ['version' => 'Unknown'];
     exec("uname -srm", $kernel);
     exec("mysql -V", $mysqlVerOut);
     $mysqlVer = explode(" ", $mysqlVerOut[0])[3];
@@ -27,13 +30,11 @@ if ($isStaff) {
 
     $sqlquery = "SELECT id FROM userurl ORDER BY ID DESC LIMIT 1";
     $result = $conn->query($sqlquery);
+    $count = 0;
+
     while ($row = $result->fetch_assoc()) {
         $count = $row['id'];
         break;
-    }
-
-    if (!$count) {
-        $count = 0;
     }
 
     $totalLinesQuery = "SELECT SUM(TABLE_ROWS) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'iclip'";
@@ -59,12 +60,25 @@ if ($isStaff) {
 </head>
 
 <body>
+    <?php if ($isStaff) : ?>
+        <?php
+        include_once "includes/header.php";
+        include_once "includes/menu.php";
+        ?>
+    <?php endif; ?>
     <main>
-        <?php if ($isStaff) : ?>
+        <?php if ($_ENV['ENVIRONMENT'] === 'staging') : ?>
             <section id="intro">
                 <header>
-                    <h1>Hi, <?php echo $user["name"] ? $user['name'] : $user["nickname"] ?></h1>
-                    <p>Welcome to the Interclip admin dashboard!<sup>ALPHA</sup></p>
+                    <h1>Sorry</h1>
+                    <p>The admin page is not accesible while in staging.</p>
+                </header>
+            </section>
+        <?php elseif ($isStaff) : ?>
+            <section id="intro">
+                <header>
+                    <h1>Hi, <?php echo $user["name"] ?? $user["nickname"] ?></h1>
+                    <p>Welcome to the Interclip admin dashboard!<sup>BETA</sup></p>
                 </header>
                 <aside>
                     <img alt="A lady sitting on a table" src="<?php echo ROOT ?>/img/graphics/fbdwm0.svg" height="150" />
@@ -90,8 +104,9 @@ if ($isStaff) {
                 <aside>
                     <img alt="A person using a laptop" src="<?php echo ROOT ?>/img/graphics/szaqt9.svg" height="150" />
                     <h3>Service stats</h3>
-                    <p>Total clips: <strong><?php echo $count ?></strong></p>
-                    <p>Total database rows: <strong><?php echo $totalLines ?></strong></p>
+                    <p>Clips: <strong><?php echo $count ?></strong></p>
+                    <p>Database rows: <strong><?php echo $totalLines ?></strong></p>
+                    <p>Redis items: <strong><?php echo getTotal() ?></strong></p>
                 </aside>
                 <aside>
                     <img alt="A lady looking at a database symbol" src="<?php echo ROOT ?>/img/graphics/agmx1d.svg" height="150" />
@@ -108,19 +123,16 @@ if ($isStaff) {
                     <h1>Yikes ¯\_(ツ)_/¯</h1>
                     <p>Sorry, but you don't have the permissions to access this resource.</p>
                 </header>
-
             </section>
         <?php else : ?>
-            <?php http_response_code(401); ?>
-            <section id="intro">
-                <header>
-                    <h1>Bummer</h1>
-                    <p>Hey, mr. unauthenticated, this page is not for you.</p>
-                </header>
-            </section>
+            <?php
+            http_response_code(401);
+            header("Location: " . ROOT . "/login");
+            ?>
         <?php endif; ?>
     </main>
 </body>
-    <script src="<?php echo ROOT; ?>/js/formatter.js"></script>
-    <script src="<?php echo ROOT; ?>/js/admin.js"></script>
+<script src="<?php echo ROOT; ?>/js/formatter.js"></script>
+<script src="<?php echo ROOT; ?>/js/admin.js"></script>
+
 </html>

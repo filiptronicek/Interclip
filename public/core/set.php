@@ -6,7 +6,7 @@
     ?>
     <title>New clip | Interclip</title>
 
-    <link rel="stylesheet" type="text/css" href="../css/new.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo ROOT ?>/css/new.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 

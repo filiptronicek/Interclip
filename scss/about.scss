@@ -1,0 +1,54 @@
+@import "_skip-link.scss";
+
+a {
+  color: white;
+}
+
+h1 {
+  margin-bottom: 3rem;
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+p, #facts {
+  font-size: 1.3em;
+  margin-bottom: 1rem;
+}
+
+body {
+  text-align: left;
+}
+
+main {
+  margin: auto;
+  width: 30rem;
+  max-width: 90vw;
+}
+
+.madeBy {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: sticky;
+  width: 100%;
+  background: #262626;
+}
+
+.madeBy > a {
+  font-weight: 600;
+  color: black;
+  text-decoration: none;
+}
+
+.madeBy > a > img {
+  border-radius: 250px;
+  width: 2rem;
+  margin-top: 8px;
+}

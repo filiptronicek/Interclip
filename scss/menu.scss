@@ -1,8 +1,18 @@
+@import "_button.scss";
+@import "_colors.scss";
+
 * {
-  font-family: 'Palanquin', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
-ul {
+body {
+  background-color: $primaryBlue;
+  color: #fff;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+ul#menu {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -10,7 +20,7 @@ ul {
   background-color: #333;
 }
 
-li {
+#menu li {
   float: left;
   list-style: none;
 }
@@ -27,7 +37,7 @@ li {
   text-transform: uppercase;
 }
 
-li a {
+#menu li a {
   display: block;
   color: white;
   text-align: center;
@@ -35,12 +45,12 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
+#menu li a:hover:not(.active) {
   background-color: #111;
 }
 
 .active {
-  background-color: #ff9800;
+  background-color: $primaryBlue;
 }
 
 #menu li:hover {
@@ -48,10 +58,9 @@ li a:hover:not(.active) {
 }
 
 .settingsIcon {
-  width: 32px;
-  height: 32px;
+  width: 27px;
+  height: 27px;
   transition-duration: 0.5s;
-  cursor: pointer;
   float: right;
   margin: 10px;
   color: white;
@@ -63,11 +72,17 @@ li a:hover:not(.active) {
   font-size: large;
 }
 
-.settingsIcon:hover {
+li:hover .settingsIcon {
   transform: rotate(90deg);
 }
 
-#settingsModal, #settingsModal p {
+#menu .triggerItem {
+  float: right;
+  cursor: pointer;
+}
+
+#settingsModal,
+#settingsModal p {
   color: #000;
   text-align: left;
   padding-left: 0;
@@ -84,7 +99,7 @@ li a:hover:not(.active) {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px;  /* Location of the box */
+  padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -110,7 +125,7 @@ li a:hover:not(.active) {
   }
 
   .modal {
-      padding-top: 0;
+    padding-top: 0;
   }
 
   .lg {
@@ -120,7 +135,7 @@ li a:hover:not(.active) {
 
 /* The Close Button */
 .closeBtn {
-  color: #aaaaaa;
+  color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -135,17 +150,17 @@ li a:hover:not(.active) {
 
 /* Reset Select */
 #slct {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
   appearance: none;
   outline: 0;
   box-shadow: none;
   border: 0 !important;
-  background:#DFDFDF;
+  background: #dfdfdf;
   color: black;
   background-image: none;
   font-size: medium;
+  flex: 1;
+  padding: 0 0.5em;
+  cursor: pointer;
 }
 
 /* Remove IE arrow */
@@ -166,37 +181,28 @@ li a:hover:not(.active) {
   border-radius: 0.25em;
 }
 
-#slct {
-  flex: 1;
-  padding: 0 0.5em;
-  cursor: pointer;
-}
-
 /* Arrow */
 .select::after {
-  content: "\25BC";
+  content: "▼";
   position: absolute;
   top: 0;
   right: 0;
   padding: 0 1em;
-  background: #D3D3D3;
+  background: #d3d3d3;
   cursor: pointer;
   pointer-events: none;
-  -webkit-transition: 0.25s all ease;
-  -o-transition: 0.25s all ease;
   transition: 0.25s all ease;
 }
 
 /* Transition */
 .select:hover::after {
-  color: #ff9800;
+  color: $primaryBlue;
 }
 
 dark-mode-toggle {
   display: none;
 }
 
-/* Switch */
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -227,11 +233,10 @@ dark-mode-toggle {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
-.slider:before {
+.slider::before {
   position: absolute;
   content: "";
   height: 26px;
@@ -239,21 +244,18 @@ dark-mode-toggle {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #ff9800;
+  background-color: #157efb;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #ff9800;
+  box-shadow: 0 0 1px #157efb;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
+input:checked + .slider::before {
   transform: translateX(26px);
 }
 
@@ -262,7 +264,7 @@ input:checked + .slider:before {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.slider.round::before {
   border-radius: 50%;
 }
 
@@ -276,6 +278,7 @@ h1:nth-child(1) {
 
 #adminbar {
   width: calc(100% - 20px);
+  padding: 6px 0;
   border: 1px solid black;
   border-top: none;
   display: flex;
@@ -307,26 +310,13 @@ h1:nth-child(1) {
   margin-left: auto;
 }
 
-.subitem  {
+.subitem {
   display: none;
 }
 
-.ending:hover .subitem, #adminbar:focus {
+.ending:hover .subitem,
+#adminbar:focus {
   display: inline-block;
-}
-
-.skip-link {
-  position: absolute;
-  top: -100px;
-  left: 0;
-  background: #000000;
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-
-.skip-link:focus {
-  top: 0;
 }
 
 #branch-select {

@@ -1,0 +1,29 @@
+@import "_colors.scss";
+
+button.btn {
+  padding: 0.5em 1em;
+  cursor: pointer;
+  background: white;
+  color: $primaryBlue;
+  border-radius: 12px;
+  border: none;
+  font-size: 0.7em;
+}
+
+button.btn-remove {
+  padding: 0.7em 1em;
+  cursor: pointer;
+  background: #e3342f;
+  color: white;
+  border-radius: 7px;
+  border: none;
+  font-size: 1em;
+
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 1.5rem;
+    margin-right: 8px;
+  }
+}

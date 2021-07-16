@@ -16,4 +16,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: cd /var/www/staging && sudo git pull --all && sudo composer install
+        script: cd /var/www/staging && sudo git pull --all && sudo composer install && sudo sass scss/:css/ -s compressed

@@ -1,0 +1,45 @@
+@import "_progressbar.scss";
+@import "_copy.scss";
+@import "_skip-link.scss";
+
+body {
+  min-height: 100vh;
+
+  &.dragover {
+    min-height: calc(100vh - 10px);
+    background: #489AFB;
+    border: 5px dashed white;
+  }
+
+  #dropzone.dragover {
+    background: #157EFB;
+  }
+}
+
+.demo-droppable {
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #005AC7;
+  cursor: pointer;
+}
+
+.code {
+  font-size: 3rem;
+}
+
+.modal {
+  max-height: 100vh;
+  display: none;
+}
+
+#copy {
+  display: none;
+}
+
+.output {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -3,7 +3,7 @@
     "description": "A clipboard and file sharing tool",
     "license": "MIT",
     "require-dev": {
-        "pestphp/pest": "^1.0"
+        "pestphp/pest": "^1.8"
     },
     "require": {
         "io-developer/php-whois": "^4.0",

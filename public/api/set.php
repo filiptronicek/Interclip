@@ -5,19 +5,14 @@ header('Access-Control-Allow-Origin: *');
 
 function writeDb($url)
 {
-  if (filter_var($url, FILTER_VALIDATE_URL)) {
-    require "vendor/autoload.php";
+  include_once "includes/lib/init.php";
+  include_once "includes/components/new.php";
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '../.env');
-    $dotenv->safeLoad();
-    include_once "includes/components/new.php";
-  }
-  
   $createArray = createClip($url);
   $usr = $createArray[0];
   $err = $createArray[1];
 
-  if (isset($url)) {
+  if (!empty($url)) {
     if ($err === "") {
       if (isset($usr) && $usr != null) {
         echo json_encode(['status' => 'success', 'result' => $usr]);
@@ -26,7 +21,7 @@ function writeDb($url)
         echo json_encode(['status' => 'error', 'result' => 'invalid URL specified']);
       }
     } else {
-      http_response_code(503);
+      http_response_code(400);
       echo json_encode(['status' => 'error', 'result' => $err]);
     }
   } else {
